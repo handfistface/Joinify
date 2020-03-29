@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Joinify", "Joinify\Joinify.njsproj", "{642E07B4-4D38-4170-BD42-E256B1059902}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{642E07B4-4D38-4170-BD42-E256B1059902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642E07B4-4D38-4170-BD42-E256B1059902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642E07B4-4D38-4170-BD42-E256B1059902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642E07B4-4D38-4170-BD42-E256B1059902}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3825BF4-7A58-49C9-B715-986649F86208}
+	EndGlobalSection
+EndGlobal

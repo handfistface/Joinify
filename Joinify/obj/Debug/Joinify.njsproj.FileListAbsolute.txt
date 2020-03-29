@@ -1,0 +1,2 @@
+D:\code\Joinify\Joinify\obj\Debug\Joinify.njsprojAssemblyReference.cache
+D:\code\Joinify\Joinify\bin\Microsoft.NodejsTools.WebRole.dll
