@@ -1,12 +1,18 @@
 
 let BaseCommand = require("./BaseCommand.js");
+let AudioPlayer = require("../Audio/AudioPlayer.js");
 const ytdl = require('ytdl-core');
 
+/*
+ * Represents a command for watching a channel
+ */
 class WatchCommand extends BaseCommand {
 
     channelId;      //channel id who is being watched
     friendlyChannelName;        //friendly name of the channel being watched
-    isAudioReady;        //allows playing audio
+    joinLink;       //youtube link to play when a person joins
+    leaveLink;      //youtube link to play when a person leaves
+    audioPlayer;        //AudioPlayer class which plays audio for the app
 
     /*
      * @cmdParams - The collection of command parameters sent to the watch command, expects a string array
@@ -18,13 +24,15 @@ class WatchCommand extends BaseCommand {
         //class based variable initialization
         this.channelId = '';
         this.friendlyChannelName = '';
-        this.isAudioReady = true;
+        this.joinLink = 'https://www.youtube.com/watch?v=KLIiGMMMf-E';
+        this.leaveLink = 'https://youtu.be/7NFwhd0zsHU';
+        this.audioPlayer = new AudioPlayer(botClient);
     }
 
     /*
      * Processes the watch command
      */
-    ProcessCommand() {
+    ProcessWatchCommand() {
         if (this.commandParameters.length < 1)
             return;
         //get the channel id
@@ -36,13 +44,17 @@ class WatchCommand extends BaseCommand {
             this.message.channel.send('Channel ' + this.friendlyChannelName + ' not found');
             return;
         } else {
-            this.message.channel.send('Watching the channel ' + this.friendlyChannelName + ' for new users joining');
+
+            //hook to the join events for the given channel id
+            this.client.on('voiceStateUpdate', (oldMember, newMember) => {
+                this.ListenToChannel(oldMember, newMember);
+            });
+
+            //just display a message so the user knows they're being watched
+            this.message.channel.send('Watching the channel ' + this.friendlyChannelName + ' for joining users');
+            this.audioPlayer.channelId = this.channelId;
         }
 
-        //hook to the join events for the given channel id
-        this.client.on('voiceStateUpdate', (oldMember, newMember) => {
-            this.ListenToChannel(oldMember, newMember);
-        });
     }
 
 
@@ -65,32 +77,18 @@ class WatchCommand extends BaseCommand {
             (oldUserChannel !== null && newUserChannel !== null && oldUserChannel.id != newUserChannel.id && newUserChannel.id == this.channelId)
         ) {
             //a user has joined the watching channel
-            this.message.channel.send('User has joined ' + newUserChannel.name);
-            //connect to the channel that the user has just connected to
-            const channel = this.client.channels.cache.get(this.channelId);
-            channel.join().then(connection => {
-                //voice chat join successful
-                this.isAudioReady = false;
-                var ytStream = 'D:\code\Joinify\Joinify\AudioFiles\yooooooooooo.mp3';//ytdl('https://www.youtube.com/watch?v=KLIiGMMMf-E');
-                const dispatcher = connection.play(ytStream, { volume: 0.75, quality: 'highestaudio' });
-                dispatcher.on('error', (ex) => {
-                    console.error('Error while playing audio: ' + ex)
-                });
-                dispatcher.on('end', end => {
-                    //ended playing the file
-                    this.isAudioReady = true;
-                    channel.leave();
-                });
-            }).catch(ex => {
-                console.error('Error connecting to voice channel: ' + ex);
-            })
+            //this.message.channel.send('User has joined ' + newUserChannel.name);
+            console.info('User has joined ' + newUserChannel.name);
+            this.audioPlayer.PlayYoutube(this.joinLink);
         }
         else if (
             (oldUserChannel !== null && newUserChannel === null && oldUserChannel.id == this.channelId) ||      //user has left the channel
             (oldUserChannel !== null && newUserChannel !== null && newUserChannel.id != this.channelId)         //user has swapped channels
         ) {
             //a user has left a voice channel 
-            this.message.channel.send("User has left " + oldUserChannel.name);
+            //this.message.channel.send("User has left " + oldUserChannel.name);
+            console.info("User has left " + oldUserChannel.name);
+            this.audioPlayer.PlayYoutube(this.leaveLink);
         }
     }
 

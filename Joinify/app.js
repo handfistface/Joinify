@@ -36,7 +36,7 @@ client.on('message', msg => {
     } else if (cmd == '!watch') {
         try {
             let watchCmd = new WatchCommand(cmdParameters, client, msg);
-            watchCmd.ProcessCommand();
+            watchCmd.ProcessWatchCommand();
         } catch (ex) {
             console.log('Error while processing join command: ' + ex.message);
         }

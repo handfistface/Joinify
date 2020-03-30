@@ -4,4 +4,4 @@ node_modules/
 jspm_packages/
 
 # .env file will contain the bot's token for the api, which shouldn't be synced
-.env
+/Joinify/.env
