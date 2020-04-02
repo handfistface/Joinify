@@ -1,0 +1,9 @@
+
+04-01-2020
+	Help command added
+03-31-2020
+	Working on a little maintence stuff, volume needs adjusted, maybe some refactoring
+	Built the publish script
+	Project needs hosted while I'm working on it so I guess that's the point of the publish script, make my job easier
+03-30-2020
+	Project is functional, it joins chat plays the audio, disconnects

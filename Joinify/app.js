@@ -5,8 +5,10 @@ require('dotenv').config();
 const ytdl = require('ytdl-core');
 const Discord = require('discord.js');
 const client = new Discord.Client();
-//import other files
-let WatchCommand = require('./Commands/Watch.js');
+
+//import classes
+let WatchCommand = require('./Commands/WatchCommand.js');
+let HelpCommand  = require('./Commands/HelpCommand.js');
 
 //event listener when a user connects to the server
 client.on('ready', () => {
@@ -38,10 +40,11 @@ client.on('message', msg => {
             let watchCmd = new WatchCommand(cmdParameters, client, msg);
             watchCmd.ProcessWatchCommand();
         } catch (ex) {
-            console.log('Error while processing join command: ' + ex.message);
+            console.log('Error while processing watch command: ' + ex.message);
         }
-    } else if (cmd == '!disconnect') {
-
+    } else if (cmd == '!JoinifyHelp') {
+        let helpCmd = new HelpCommand(cmdParameters, client, msg);
+        helpCmd.ProcessHelp();
     }
 });
 

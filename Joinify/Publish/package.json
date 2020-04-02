@@ -1,0 +1,15 @@
+{
+  "name": "joinify",
+  "version": "1.0.0",
+  "description": "Plays audio upon someone joining a channel",
+  "main": "app.js",
+  "author": {
+    "name": "John Kirschner"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.1.0",
+    "discord.js": "^12.1.1",
+    "dotenv": "^8.2.0",
+    "ytdl-core": "^2.0.1"
+  }
+}

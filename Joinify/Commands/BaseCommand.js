@@ -1,6 +1,10 @@
 
 class BaseCommand {
 
+    commandParameters;      //parameters that came from the command
+    client;     //discord.js bot client
+    message;    //message object generated from discord.js
+
     /*
      * @cmdParams - The collection of command parameters sent to the watch command, expects a string array
      * @botClient - The discord bot client created and institated through Discord.js
@@ -31,6 +35,14 @@ class BaseCommand {
         }
 
         return channelId;
+    }
+
+    /*
+     * Reponds to a message
+     * Make sure to set the class variable message before calling this method
+     */
+    ReplyToMessage(msgResponse) {
+        this.message.channel.send(msgResponse);
     }
 }
 
