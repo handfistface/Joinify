@@ -79,6 +79,10 @@ class WatchCommand extends BaseCommand {
             return;
         }
 
+        //don't process the channel if the user is only muting or unmuting
+        if (newMember != null && oldMember != null && newMember.mute != oldMember.mute)
+            return;
+
         if (
             (oldUserChannel === null && newUserChannel !== null && newUserChannel.id == this.channelId) ||
             (oldUserChannel !== null && newUserChannel !== null && oldUserChannel.id != newUserChannel.id && newUserChannel.id == this.channelId)

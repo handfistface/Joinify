@@ -2,6 +2,7 @@
 rem Copies the javascript structure to the ./Publish/ folder
 robocopy ./Audio ./Publish/Audio /purge
 robocopy ./Commands ./Publish/Commands /purge
+robocopy ./Utilities ./Publish/Utilities /purge
 robocopy ./.env ./Publish/.env /purge
 
 rem copy files from the base directory
