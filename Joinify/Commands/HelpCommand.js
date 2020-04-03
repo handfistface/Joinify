@@ -17,7 +17,9 @@ class HelpCommand extends BaseCommand {
     ProcessHelp() {
         var msg = '';
         msg += 'Comand list: \n';
-        msg += '\t!watch [channel name] -- Watches a channel for people joining a channel';
+        msg += '\t!watch [channel name] -- Watches a channel for people joining a channel\n';
+        msg += '\t!joinchange [youtube link] -- changes the audio thats played on joining a channel\n';
+        msg += '\t!leavechange [youtube link] -- changes the audio thats played on leaving a channel\n';
 
         this.ReplyToMessage(msg);
     }

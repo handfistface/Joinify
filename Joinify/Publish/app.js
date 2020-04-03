@@ -5,8 +5,14 @@ require('dotenv').config();
 const ytdl = require('ytdl-core');
 const Discord = require('discord.js');
 const client = new Discord.Client();
-//import other files
+
+//import classes
 let WatchCommand = require('./Commands/WatchCommand.js');
+let HelpCommand = require('./Commands/HelpCommand.js');
+
+//command initialization
+var watchCmd = new WatchCommand(null, null, null);
+var helpCmd = new HelpCommand(null, null, null);
 
 //event listener when a user connects to the server
 client.on('ready', () => {
@@ -26,22 +32,39 @@ client.on('message', msg => {
     if (msg.content.indexOf(' ') == -1)
         cmd = msg.content;
     else {
+        //then there were parameters given to this command
         cmd = msg.content.substring(0, msg.content.indexOf(' '));
-        //split the command parameters up
         cmdParameters = msg.content.substring(cmd.length + 1).split(' ');
     }
 
-    if (cmd == '!ping') {
-        msg.channel.send('pong');
-    } else if (cmd == '!watch') {
+    if (cmd == '!watch') {
+        //this was the watch command
         try {
-            let watchCmd = new WatchCommand(cmdParameters, client, msg);
+            watchCmd.commandParameters = cmdParameters;
+            watchCmd.client = client;
+            watchCmd.message = msg;
             watchCmd.ProcessWatchCommand();
         } catch (ex) {
-            console.log('Error while processing join command: ' + ex.message);
+            console.log('Error while processing watch command: ' + ex.message);
         }
-    } else if (cmd == '!disconnect') {
-
+    } else if (cmd == '!joinchange') {
+        //the user wants to change the join link
+        watchCmd.commandParameters = cmdParameters;
+        watchCmd.client = client;
+        watchCmd.message = msg;
+        watchCmd.ProcessJoinChangeCommand();
+    } else if (cmd == '!leavechange') {
+        //the user wants to change the leave link
+        watchCmd.commandParameters = cmdParameters;
+        watchCmd.client = client;
+        watchCmd.message = msg;
+        watchCmd.ProcessLeaveChangeCommand();
+    } else if (cmd == '!joinifyhelp') {
+        //this was the help command
+        helpCmd.commandParameters = cmdParameters;
+        helpCmd.client = client;
+        helpCmd.message = msg;
+        helpCmd.ProcessHelp();
     }
 });
 

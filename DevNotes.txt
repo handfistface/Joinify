@@ -1,4 +1,8 @@
 
+Written using ffmpeg 20200328-3362330-win64 static
+
+04-02-2020
+	Added the join change and leave change commands, expanded the help command to reflect this
 04-01-2020
 	Help command added
 03-31-2020

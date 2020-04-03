@@ -46,10 +46,12 @@
     <Content Include="package.json" />
     <Content Include="Publish.bat" />
     <Content Include="README.md" />
+    <Content Include="Utilities\DateService.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Audio\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
 </Project>
