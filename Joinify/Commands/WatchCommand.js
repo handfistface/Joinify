@@ -82,10 +82,10 @@ class WatchCommand extends BaseCommand {
         //don't process the channel if the user is only muting or unmuting
         //don't process the channel if the user is only deafening or undeafening
         //don't process the channel if the user is only streaming or unstreaming
-        if (newMember != null && oldMember != null &&
-            newMember.mute != oldMember.mute &&
-            newMember.deaf != oldMember.deaf &&
-            newMember.streaming != oldMember.streaming)
+        if (newMember != null && oldMember != null && (
+            newMember.mute != oldMember.mute ||
+            newMember.deaf != oldMember.deaf ||
+            newMember.streaming != oldMember.streaming))
             return;
 
         if (

@@ -20,6 +20,7 @@ class HelpCommand extends BaseCommand {
         msg += '\t!watch [channel name] -- Watches a channel for people joining a channel\n';
         msg += '\t!joinchange [youtube link] -- changes the audio thats played on joining a channel\n';
         msg += '\t!leavechange [youtube link] -- changes the audio thats played on leaving a channel\n';
+        msg += '\t!joinifyplay [youtube link] -- joins and plays the audio link';
 
         this.ReplyToMessage(msg);
     }
