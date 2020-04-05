@@ -1,6 +1,8 @@
 
 Written using ffmpeg 20200328-3362330-win64 static
 
+04-04-2020
+	Added the joinify play command
 04-02-2020
 	Added the join change and leave change commands, expanded the help command to reflect this
 	I swear to fucking god if I upload my API key one more time I'm gonna lose my fucking shit

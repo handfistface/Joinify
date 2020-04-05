@@ -9,10 +9,12 @@ const client = new Discord.Client();
 //import classes
 let WatchCommand = require('./Commands/WatchCommand.js');
 let HelpCommand = require('./Commands/HelpCommand.js');
+let PlayTestCommand = require('./Commands/PlayTestCommand.js');
 
 //command initialization
 var watchCmd = new WatchCommand(null, null, null);
 var helpCmd = new HelpCommand(null, null, null);
+var playCmd = new PlayTestCommand(null, null, null);
 
 //event listener when a user connects to the server
 client.on('ready', () => {
@@ -65,6 +67,12 @@ client.on('message', msg => {
         helpCmd.client = client;
         helpCmd.message = msg;
         helpCmd.ProcessHelp();
+    } else if (cmd == '!joinifyplay') {
+        //this was the play command
+        playCmd.commandParameters = cmdParameters;
+        playCmd.client = client;
+        playCmd.message = msg;
+        playCmd.ProcessPlayTestCommand();
     }
 });
 
