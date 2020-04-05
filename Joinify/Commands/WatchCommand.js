@@ -88,6 +88,10 @@ class WatchCommand extends BaseCommand {
             newMember.streaming != oldMember.streaming))
             return;
 
+        //don't process the channel if there's already audio being played
+        if (this.audioPlayer.isAudioReady == false)
+            return;
+
         if (
             (oldUserChannel === null && newUserChannel !== null && newUserChannel.id == this.channelId) ||
             (oldUserChannel !== null && newUserChannel !== null && oldUserChannel.id != newUserChannel.id && newUserChannel.id == this.channelId)
